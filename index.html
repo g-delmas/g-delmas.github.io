@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+    <title>Ginger Delmas</title>
+    <!-- Add icon library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<style>
+		body {
+            max-width: 1200px ;
+			padding: 6px 12px;
+			font-family: 'Roboto', 'Noto', sans-serif;
+            margin: auto;
+		}
+        .section {
+            margin-top: 50px;
+            margin-bottom: 30px;
+        }
+        .section > p {
+            font-size: large;
+            font-weight: bold;
+        }
+        a {
+            font-weight: bold;
+            color: rgb(99, 167, 235);
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        li {
+            padding-bottom: 10px;
+        }
+
+        /* PROFILE SECTION */
+        .thats-me {
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 30px;
+        }
+        .thats-me > img {
+            border-radius: 40px;
+        }
+        .profile-info {
+            display: inline-block;
+            vertical-align: middle;
+            width: 670px;
+            padding: 20px;
+        }
+        .profile-data-item {
+            display: inline-block;
+            color: black;
+            border: 3px solid rgb(250, 196, 103);
+            border-radius: 5px;
+            background-color: rgb(250, 196, 103);
+            padding: 5px;
+            margin-right: 2px;
+        }
+
+        /* PAPER SECTION */
+        .paper {
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        }
+        .paper-thumbnails {
+            width: 400px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-right: 30px;
+            text-align: center;
+        }
+        .paper-thumbnails > img {
+            margin: 0 auto;
+            max-width: 400px;
+        }
+        .paper-info {
+            display: inline-block;
+            vertical-align: middle;
+            max-width: 670px;
+            padding: 20px;
+        }
+        .paper-title {
+            font-weight: bold;
+        }
+        .paper-status {
+            font-style: italic;
+        }
+        .paper-status-chip {
+            font-style: italic;
+            font-weight: bold;
+            color: rgb(255, 196, 0);
+            background-color: black;
+            border-radius: 16px;
+            padding-left:10px;
+            padding-right:10px;
+            padding-top:2px;
+            padding-bottom:2px;
+        }
+        .paper-small-descr {
+            color: rgb(97, 97, 97);
+            font-style: italic;
+            font-size: medium;
+            text-align: justify;
+        }
+        .paper-data-item {
+            display: inline-block;
+            color: white;
+            border: 3px solid rgb(99, 167, 235);
+            border-radius: 5px;
+            background-color: rgb(99, 167, 235);
+            padding: 5px;
+            margin-right: 2px;
+        }
+        .paper-data-item-disabled {
+            display: inline-block;
+            color: white;
+            border: 3px solid rgb(161, 161, 161);
+            border-radius: 5px;
+            background-color: rgb(161, 161, 161);
+            padding: 5px;
+            margin-right: 2px;
+        }
+
+        /* BIO SECTION */
+        .bio-item {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        .bio-date {
+            display: inline-block;
+            vertical-align: middle;
+            width: 10%;
+            text-align: center;
+        }
+        .bio-date > span {
+            width: fit-content;
+            text-align: center;
+            font-weight: bold;
+            padding-left: 5px;
+            padding-right: 5px;
+            padding-top: 2px;
+            padding-bottom: 2px;
+            border: 3px solid rgb(250, 196, 103);
+            border-radius: 5px;
+            background-color: rgb(250, 196, 103);
+        }
+        .bio-info {
+            display: inline-block;
+            vertical-align: middle;
+            width: 80%;
+            padding-left: 30px;
+        }
+
+        /* The snackbar */
+        
+        #snackbar {
+            visibility: hidden; /* Hidden by default. Visible on click */
+            min-width: 250px; /* Set a default minimum width */
+            margin-left: -125px; /* Divide value of min-width by 2 */
+            background-color: #333; /* Black background color */
+            color: #fff; /* White text color */
+            text-align: center; /* Centered text */
+            border-radius: 5px; /* Rounded borders */
+            padding: 16px; /* Padding */
+            position: fixed; /* Sit on top of the screen */
+            z-index: 1; /* Add a z-index if needed */
+            left: 50%; /* Center the snackbar */
+            bottom: 30px; /* 30px from the bottom */
+        }
+
+        /* Show the snackbar when clicking on a button (class added with JavaScript) */
+        #snackbar.show {
+            visibility: visible; /* Show the snackbar */
+            /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
+            However, delay the fade out process for 2.5 seconds */
+            -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+
+        /* Animations to fade the snackbar in and out */
+        @-webkit-keyframes fadein {
+        from {bottom: 0; opacity: 0;}
+        to {bottom: 30px; opacity: 1;}
+        }
+
+        @keyframes fadein {
+        from {bottom: 0; opacity: 0;}
+        to {bottom: 30px; opacity: 1;}
+        }
+
+        @-webkit-keyframes fadeout {
+        from {bottom: 30px; opacity: 1;}
+        to {bottom: 0; opacity: 0;}
+        }
+
+        @keyframes fadeout {
+        from {bottom: 30px; opacity: 1;}
+        to {bottom: 0; opacity: 0;}
+        }
+	</style>
+    <script>
+
+
+        function copy_email() {
+            // Get the text to copy
+            var copyText = 'gdelmas -at- iri.upc.edu'
+
+            // Copy the text to clipboard
+            navigator.clipboard.writeText(copyText);
+
+            // Alert that the text was copied (temporary show the snackbar)
+            var snackbar = document.getElementById("snackbar");
+            snackbar.textContent = "Email address copied!"
+            snackbar.className = "show";
+            setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 3000);
+        }
+
+
+        function copy_bibtext(e) {
+            // Get the text to copy
+            var paper_name = e.parentNode.parentNode.parentNode.id;
+            var copyText = document.getElementById(paper_name+"_bibtex").textContent;
+            // remove initial tabulation
+            var nb_useless_spaces = copyText.search(/\S/)-1; // get the initial number of spaces
+            copyText = copyText.split("\n").slice(1); // remove initial empty line; split into lines
+            copyText = [...copyText].map((v) => v.substr(nb_useless_spaces) ); // remove the space offset from each line
+            copyText = copyText.join("\n"); // join lines into one text
+
+            // Copy the text to clipboard
+            navigator.clipboard.writeText(copyText);
+
+            // Alert that the text was copied (temporary show the snackbar)
+            var snackbar = document.getElementById("snackbar");
+            snackbar.textContent = "BibTex copied!"
+            snackbar.className = "show";
+            setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 3000);
+        }
+
+    </script>
+</head>
+
+<body>
+
+    <div id="header">
+        <div>
+            <div class="thats-me">
+                <img src="images/profile_picture.jpg">
+            </div>
+            <div class="profile-info">
+                <h1>Ginger Delmas</h1>
+                <h3>PhD student at <a href="https://www.iri.upc.edu/">IRI-UPC-CSIC</a> & <a href="https://europe.naverlabs.com/">NAVER LABS Europe</a>.</li></h3>
+                <p>I am supervised by Francesc Moreno-Noguer, Philippe Weinzaepfel and Grégory Rogez. I am working on natural language texts and 3D human poses: my goal is to leverage text to improve human pose, shape, motion estimation and generation.</p>
+                <div class="profile-data">
+                    <!-- <a class="profile-data-item" href="" target="_blank" rel="noopener noreferrer"><i class="fa fa-graduation-cap"></i> CV</a> -->
+                    <a class="profile-data-item" onclick='copy_email()'><i class="fa fa-envelope"></i> Contact</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- TOOLS -->
+    <div id="snackbar"></div> 
+
+
+    <!-- PAPERS -->
+    <div>
+        <div class="section">
+            <p>Papers</p>
+            <hr>
+        </div>
+
+        <!-- POSEFIX -->
+        <div id="posefix_iccv23" class="paper">
+            <div class="paper-thumbnails">
+                <img src="images/PoseFix_thumbnails.png">
+            </div>
+            <div class="paper-info">
+                <span class="paper-status-chip">ICCV 2023</span>
+                <p class="paper-title">PoseFix: Correcting 3D Human Poses with Natural Language</p>
+                <p class="paper-authors">Ginger Delmas, Philippe Weinzaepfel, Francesc Moreno-Noguer, Grégory Rogez</p>
+                <!-- <p class="paper-status">International Conference on Computer Vision (ICCV 2023)</p> -->
+                <p class="paper-small-descr">We introduce the PoseFix dataset, which consists in over 6k triplets of 3D human pose pairs and a text modifier describing how the source pose needs to be modified to obtain the target pose. We further train a text-based pose editing model to generate corrected 3D body poses given a query pose and a text modifier; and a correctional text generation, where instructions are generated based on the differences between two body poses.</p>
+                <div class="paper-data">
+                    <a class="paper-data-item" href="https://arxiv.org/pdf/2309.08480.pdf" target="_blank" rel="noopener noreferrer"><i class="fa fa-file"></i> Paper</a>
+                    <a class="paper-data-item" href="https://europe.naverlabs.com/research/computer-vision/posefix/" target="_blank" rel="noopener noreferrer"><i class="fa fa-globe"></i> Webpage</a>
+                    <a class="paper-data-item-disabled" aria-disabled="true" target="_blank" rel="noopener noreferrer"><i class="fa fa-code"></i> Code (soon)</a>
+                    <a class="paper-data-item-disabled" aria-disabled="true" target="_blank" rel="noopener noreferrer"><i class="fa fa-image"></i> Poster (soon)</a>
+                    <a class="paper-data-item" onclick='copy_bibtext(this)'><i class="fa fa-book"></i> BibTex</a>
+                    <a class="paper-data-item" href="https://download.europe.naverlabs.com/ComputerVision/PoseFix/posefix_dataset_release.zip" target="_blank" rel="noopener noreferrer"><i class="fa fa-database"></i> Data</a>
+                </div>
+                <div id="posefix_iccv23_bibtex" style="display: none;">
+                    @inproceedings{delmas2023posefix,
+                        title={{PoseFix: Correcting 3D Human Poses with Natural Language}},
+                        author={{Delmas, Ginger and Weinzaepfel, Philippe and Moreno-Noguer, Francesc and Rogez, Gr\'egory}},
+                        booktitle={{ICCV}},
+                        year={2023}
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- POSESCRIPT -->
+        <div id="posescript_eccv22" class="paper">
+            <div class="paper-thumbnails">
+                <img src="images/PoseScript_thumbnails.svg">
+            </div>
+            <div class="paper-info">
+                <span class="paper-status-chip">ECCV 2022</span>
+                <p class="paper-title">PoseScript: 3D Human Poses from Natural Language</p>
+                <p class="paper-authors">Ginger Delmas, Philippe Weinzaepfel, Thomas Lucas, Francesc Moreno-Noguer, Grégory Rogez</p>
+                <!-- <p class="paper-status">European Conference on Computer Vision (ECCV 2022)</p> -->
+                <p class="paper-small-descr">We collect a dataset, PoseScript, pairing 3D human poses from AMASS and descriptions both written by human annotators and generated automatically by our proposed pipeline. We use PoseScript to train text-to-pose models, both for retrieval and generation. Pretraining on automatic data boost performance by a factor 2.</p>
+                <div class="paper-data">
+                    <a class="paper-data-item" href="https://arxiv.org/pdf/2210.11795.pdf" target="_blank" rel="noopener noreferrer"><i class="fa fa-file"></i> Paper</a>
+                    <a class="paper-data-item" href="https://europe.naverlabs.com/research/computer-vision/posescript/" target="_blank" rel="noopener noreferrer"><i class="fa fa-globe"></i> Webpage</a>
+                    <a class="paper-data-item" href="https://github.com/naver/posescript" target="_blank" rel="noopener noreferrer"><i class="fa fa-code"></i> Code</a>
+                    <a class="paper-data-item" href="https://europe.naverlabs.com/wp-content/uploads/2022/10/posescript_eccv_poster.pdf" target="_blank" rel="noopener noreferrer"><i class="fa fa-image"></i> Poster</a>
+                    <a class="paper-data-item" onclick='copy_bibtext(this)'><i class="fa fa-book"></i> BibTex</a>
+                    <a class="paper-data-item" href="https://download.europe.naverlabs.com/ComputerVision/PoseScript/posescript_dataset_release.zip" target="_blank" rel="noopener noreferrer"><i class="fa fa-database"></i> Data</a>
+                </div>
+                <div id="posescript_eccv22_bibtex" style="display: none;">
+                    @inproceedings{delmas2022posescript,
+                        title={{PoseScript: 3D Human Poses from Natural Language}},
+                        author={{Delmas, Ginger and Weinzaepfel, Philippe and Lucas, Thomas and Moreno-Noguer, Francesc and Rogez, Gr\'egory}},
+                        booktitle={{ECCV}},
+                        year={2022}
+                    }
+                </div>
+            </div>
+        </div>
+
+        <!-- ARTEMIS -->
+        <div id="artemis_iclr22" class="paper">
+            <div class="paper-thumbnails">
+                <img src="images/ARTEMIS_thumbnails.png">
+            </div>
+            <div class="paper-info">
+                <span class="paper-status-chip">ICLR 2022</span>
+                <p class="paper-title">ARTEMIS: Attention-based Retrieval with Text-Explicit Matching and Implicit Similarity</p>
+                <p class="paper-authors">Ginger Delmas, Rafael Sampaio De Rezende, Gabriela Csurka, Diane Larlus</p>
+                <!-- <p class="paper-status">International Conference on Learning Representations (ICLR 2022)</p> -->
+                <p class="paper-small-descr">We take inspiration from image retrieval and cross-modal retrieval to tackle the task of composed image retrieval: we design two complementary modules, each focusing on one modality of the query. The Explicit Matching module assesses how potential targets fit the textual modifier while the Implicit Similarity module compares potential target images to the reference image, assisted by the text. We validate our approach on FashionIQ, Shoes and CIRR.</p>
+                <div class="paper-data">
+                    <a class="paper-data-item" href="https://openreview.net/pdf?id=CVfLvQq9gLo" target="_blank" rel="noopener noreferrer"><i class="fa fa-file"></i> Paper</a>
+                    <a class="paper-data-item" href="https://europe.naverlabs.com/research/computer-vision/artemis/" target="_blank" rel="noopener noreferrer"><i class="fa fa-globe"></i> Webpage</a>
+                    <a class="paper-data-item" href="https://github.com/naver/artemis" target="_blank" rel="noopener noreferrer"><i class="fa fa-code"></i> Code</a>
+                    <a class="paper-data-item" href="https://europe.naverlabs.com/wp-content/uploads/2022/10/ARTEMIS_ICLR_poster_final.png" target="_blank" rel="noopener noreferrer"><i class="fa fa-image"></i> Poster</a>
+                    <a class="paper-data-item" onclick='copy_bibtext(this)'><i class="fa fa-book"></i> BibTex</a>
+                </div>
+                <div id="artemis_iclr22_bibtex" style="display: none;">
+                    @InProceedings{delmas2022artemis,
+                        title={Artemis: Attention-based retrieval with text-explicit matching and implicit similarity},
+                        author={Delmas, Ginger and de Rezende, Rafael Sampaio and Csurka, Gabriela and Larlus, Diane},
+                        booktitle={ICLR},
+                        year={2022}
+                    }
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- BIOGRAPHY -->
+    <div>
+        <div class="section">
+            <p>Biography</p>
+            <hr>
+        </div>
+        <div class="bio">
+            <!-- <div class="bio-item"><div class="bio-date"><span>2023</span></div><div class="bio-info">Attended <a href="https://iplab.dmi.unict.it/icvss2023/Home" target="_blank" rel="noopener noreferrer">ICVSS 2023</a>.</div></div> -->
+            <div class="bio-item"><div class="bio-date"><span>2023</span></div>
+            <div class="bio-item"><div class="bio-date"><i class="fa fa-tag"></i></div><div class="bio-info">Attended <a href="https://iplab.dmi.unict.it/icvss2023/Home" target="_blank" rel="noopener noreferrer">ICVSS 2023</a>.</div></div>
+            <!-- <div class="bio-item"><div class="bio-date"><span>2021</span></div><div class="bio-info">Starting my PhD at <a href="https://www.iri.upc.edu/" target="_blank" rel="noopener noreferrer">IRI-UPC-CSIC</a> in collaboration with <a href="https://europe.naverlabs.com/ target="_blank" rel="noopener noreferrer"">NAVER LABS Europe</a>, supervised by Francesc Moreno-Noguer, Philippe Weinzaepfel and Grégory Rogez.</div></div> -->
+            <div class="bio-item"><div class="bio-date"><span>2021</span></div>
+            <div class="bio-item"><div class="bio-date"><i class="fa fa-tag"></i></div><div class="bio-info">[December] Starting my PhD at <a href="https://www.iri.upc.edu/" target="_blank" rel="noopener noreferrer">IRI-UPC-CSIC</a> in collaboration with <a href="https://europe.naverlabs.com/ target="_blank" rel="noopener noreferrer"">NAVER LABS Europe</a>, supervised by Francesc Moreno-Noguer, Philippe Weinzaepfel and Grégory Rogez.</div></div>
+            <div class="bio-item"><div class="bio-date"><span>2020</span></div></div>
+            <div class="bio-item"><div class="bio-date"><i class="fa fa-tag"></i></div><div class="bio-info">Internship at <a href="https://europe.naverlabs.com/" target="_blank" rel="noopener noreferrer">NAVER LABS Europe</a>, supervised by Diane Larlus and Rafael Sampaio De Rezende.</div></div>
+            <div class="bio-item"><div class="bio-date"><i class="fa fa-tag"></i></div><div class="bio-info">Obtained the <a href="https://www.master-mva.com/" target="_blank" rel="noopener noreferrer">MVA master's degree</a> (ENS Paris-Saclay).</div></div>
+            <div class="bio-item"><div class="bio-date"><i class="fa fa-tag"></i></div><div class="bio-info">Graduated from <a href="https://www.telecom-paris.fr/" target="_blank" rel="noopener noreferrer">Télécom Paris</a>.</div></div>
+        </div>
+    </div>
+
+
+</body>
+
+</html>
