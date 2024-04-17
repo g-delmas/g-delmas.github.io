@@ -5,7 +5,8 @@
 	<meta charset="utf-8">
     <title>Ginger Delmas</title>
     <!-- Add icon library -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Note: to check whether an icon is freely available, go to https://origin.fontawesome.com/v6/search?o=r&m=free ; and be sure to select the right version. An icon named as "fa-solid fa-envelope" should be indicated as "fas fa-envelope"; same for "fa-brand fa-google-scholar": "fab fa-google-scholar" etc...-->
 	<style>
 		body {
             max-width: 1200px ;
@@ -104,7 +105,13 @@
             font-style: italic;
             font-size: medium;
             text-align: justify;
-            display: none;
+            opacity: 0;
+            height: 0px;
+      }
+        .paper-small-descr.show {
+            opacity: 1;
+            height: auto;
+            transition: opacity 0.5s ease-in-out;
         }
         .paper-data-item {
             display: inline-block;
@@ -126,33 +133,23 @@
         }
 
         /* BIO SECTION */
+        .bio {
+            width: 60%;
+            margin-inline: 20%;
+        }
         .bio-item {
             margin-top: 5px;
             margin-bottom: 5px;
         }
         .bio-date {
-            display: inline-block;
-            vertical-align: middle;
-            width: 10%;
-            text-align: center;
-        }
-        .bio-date > span {
-            width: fit-content;
-            text-align: center;
+            width: 100%;
+            /* text-align: center; */
             font-weight: bold;
             padding-left: 5px;
             padding-right: 5px;
             padding-top: 2px;
             padding-bottom: 2px;
-            border: 3px solid rgb(250, 196, 103);
-            border-radius: 5px;
-            background-color: rgb(250, 196, 103);
-        }
-        .bio-info {
-            display: inline-block;
-            vertical-align: middle;
-            width: 80%;
-            padding-left: 30px;
+            text-decoration: underline;
         }
 
         /* The snackbar */
@@ -240,19 +237,15 @@
             setTimeout(function(){ snackbar.className = snackbar.className.replace("show", ""); }, 3000);
         }
 
+
         function know_more(e) {
-            // Get the text to copy
-            var paper_name = e.parentNode.parentNode.parentNode.id;
-            var description_element = document.getElementById(paper_name+"_descr");
-            // Interaction
-            if (description_element.style.display == "") {
-                description_element.style.display = "flex";
-            }
-            else {
-                description_element.style.display = "";
-            }
+            var paper_name = e.id;
+            var description_element = document.getElementById(paper_name+"_descr");        
+            // description_element.classList.toggle("show");
+            description_element.classList.add("show");
         }
 
+        
     </script>
 </head>
 
@@ -268,8 +261,10 @@
                 <h3>PhD student at <a href="https://www.iri.upc.edu/">IRI-UPC-CSIC</a> & <a href="https://europe.naverlabs.com/">NAVER LABS Europe</a>.</li></h3>
                 <p>I am supervised by Francesc Moreno-Noguer, Philippe Weinzaepfel and Grégory Rogez. I am working on natural language texts and 3D human poses: my goal is to leverage text to improve human pose, shape, motion estimation and generation.</p>
                 <div class="profile-data">
-                    <!-- <a class="profile-data-item" href="" target="_blank" rel="noopener noreferrer"><i class="fa fa-graduation-cap"></i> CV</a> -->
-                    <a class="profile-data-item" onclick='copy_email()'><i class="fa fa-envelope"></i> Contact</a>
+                    <a class="profile-data-item" onclick='copy_email()'><i class="fas fa-envelope"></i> Contact</a>
+                    <a class="profile-data-item" href="documents/cv_Ginger_Delmas_webpage.pdf" target="_blank" rel="noopener noreferrer"><i class="fa fa-graduation-cap"></i> CV</a>
+                    <a class="profile-data-item" href="https://fr.linkedin.com/in/ginger-delmas-a70b62192/en" target="_blank" rel="noopener noreferrer"><i class="fab fa-linkedin-in"></i> Linkedin</a>
+                    <a class="profile-data-item" href="https://scholar.google.com/citations?user=CmC-We4AAAAJ" target="_blank" rel="noopener noreferrer"><i class="fab fa-google-scholar"></i> Google Scholar</a>
                 </div>
             </div>
         </div>
@@ -287,7 +282,7 @@
         </div>
 
         <!-- POSEFIX -->
-        <div id="posefix_iccv23" class="paper">
+        <div id="posefix_iccv23" class="paper" onmouseenter='know_more(this)'>
             <div class="paper-thumbnails">
                 <img src="images/PoseFix_thumbnails.png">
             </div>
@@ -297,11 +292,11 @@
                 <p class="paper-authors">Ginger Delmas, Philippe Weinzaepfel, Francesc Moreno-Noguer, Grégory Rogez</p>
                 <!-- <p class="paper-status">International Conference on Computer Vision (ICCV 2023)</p> -->
                 <div class="paper-data">
-                    <a class="paper-data-item" onclick='know_more(this)'>&#128064; What ?</a>
-                    <a class="paper-data-item" href="https://arxiv.org/pdf/2309.08480.pdf" target="_blank" rel="noopener noreferrer"></i>&#128206; Paper</a>
+                    <!-- <a class="paper-data-item" onclick='know_more(this)'>&#128064; What ?</a> -->
+                    <a class="paper-data-item" href="https://arxiv.org/pdf/2309.08480.pdf" target="_blank" rel="noopener noreferrer"></i><i class="far fa-file-pdf"></i> Paper</a>
                     <a class="paper-data-item" href="https://europe.naverlabs.com/research/computer-vision/posefix/" target="_blank" rel="noopener noreferrer">&#127760; Webpage</a>
                     <a class="paper-data-item" href="https://github.com/naver/posescript" target="_blank" rel="noopener noreferrer"><i class="fa fa-code"></i> Code</a>
-                    <a class="paper-data-item" href="https://europe.naverlabs.com/wp-content/uploads/2023/09/ICCV23_poster_10123_compressed.pdf" target="_blank" rel="noopener noreferrer">&#128248; Poster</a>
+                    <a class="paper-data-item" href="https://europe.naverlabs.com/wp-content/uploads/2023/09/ICCV23_poster_10123_compressed.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-panorama"></i> Poster</a>
                     <a class="paper-data-item" onclick='copy_bibtext(this)'>&#128278; BibTex</a>
                     <a class="paper-data-item" href="https://download.europe.naverlabs.com/ComputerVision/PoseFix/posefix_dataset_release.zip" target="_blank" rel="noopener noreferrer"><i class="fa fa-database"></i> Data</a>
                 </div>
@@ -318,7 +313,7 @@
         </div>
 
         <!-- POSESCRIPT -->
-        <div id="posescript_eccv22" class="paper">
+        <div id="posescript_eccv22" class="paper" onmouseenter='know_more(this)'>
             <div class="paper-thumbnails">
                 <img src="images/PoseScript_thumbnails.svg">
             </div>
@@ -328,11 +323,10 @@
                 <p class="paper-authors">Ginger Delmas, Philippe Weinzaepfel, Thomas Lucas, Francesc Moreno-Noguer, Grégory Rogez</p>
                 <!-- <p class="paper-status">European Conference on Computer Vision (ECCV 2022)</p> -->
                 <div class="paper-data">
-                    <a class="paper-data-item" onclick='know_more(this)'>&#128064; What ?</a>
-                    <a class="paper-data-item" href="https://arxiv.org/pdf/2210.11795.pdf" target="_blank" rel="noopener noreferrer">&#128206; Paper</a>
+                    <a class="paper-data-item" href="https://arxiv.org/pdf/2210.11795.pdf" target="_blank" rel="noopener noreferrer"><i class="far fa-file-pdf"></i> Paper</a>
                     <a class="paper-data-item" href="https://europe.naverlabs.com/research/computer-vision/posescript/" target="_blank" rel="noopener noreferrer">&#127760; Webpage</a>
                     <a class="paper-data-item" href="https://github.com/naver/posescript" target="_blank" rel="noopener noreferrer"><i class="fa fa-code"></i> Code</a>
-                    <a class="paper-data-item" href="https://europe.naverlabs.com/wp-content/uploads/2022/10/posescript_eccv_poster.pdf" target="_blank" rel="noopener noreferrer">&#128248; Poster</a>
+                    <a class="paper-data-item" href="https://europe.naverlabs.com/wp-content/uploads/2022/10/posescript_eccv_poster.pdf" target="_blank" rel="noopener noreferrer"><i class="fas fa-panorama"></i> Poster</a>
                     <a class="paper-data-item" onclick='copy_bibtext(this)'>&#128278; BibTex</a>
                     <a class="paper-data-item" href="https://download.europe.naverlabs.com/ComputerVision/PoseScript/posescript_dataset_release.zip" target="_blank" rel="noopener noreferrer"><i class="fa fa-database"></i> Data</a>
                 </div>
@@ -349,7 +343,7 @@
         </div>
 
         <!-- ARTEMIS -->
-        <div id="artemis_iclr22" class="paper">
+        <div id="artemis_iclr22" class="paper" onmouseenter='know_more(this)'>
             <div class="paper-thumbnails">
                 <img src="images/ARTEMIS_thumbnails.png">
             </div>
@@ -359,11 +353,10 @@
                 <p class="paper-authors">Ginger Delmas, Rafael Sampaio De Rezende, Gabriela Csurka, Diane Larlus</p>
                 <!-- <p class="paper-status">International Conference on Learning Representations (ICLR 2022)</p> -->
                 <div class="paper-data">
-                    <a class="paper-data-item" onclick='know_more(this)'>&#128064; What ?</a>
-                    <a class="paper-data-item" href="https://openreview.net/pdf?id=CVfLvQq9gLo" target="_blank" rel="noopener noreferrer">&#128206; Paper</a>
+                    <a class="paper-data-item" href="https://openreview.net/pdf?id=CVfLvQq9gLo" target="_blank" rel="noopener noreferrer"><i class="far fa-file-pdf"></i> Paper</a>
                     <a class="paper-data-item" href="https://europe.naverlabs.com/research/computer-vision/artemis/" target="_blank" rel="noopener noreferrer">&#127760; Webpage</a>
                     <a class="paper-data-item" href="https://github.com/naver/artemis" target="_blank" rel="noopener noreferrer"><i class="fa fa-code"></i> Code</a>
-                    <a class="paper-data-item" href="https://europe.naverlabs.com/wp-content/uploads/2022/10/ARTEMIS_ICLR_poster_final.png" target="_blank" rel="noopener noreferrer">&#128248; Poster</a>
+                    <a class="paper-data-item" href="https://europe.naverlabs.com/wp-content/uploads/2022/10/ARTEMIS_ICLR_poster_final.png" target="_blank" rel="noopener noreferrer"><i class="fas fa-panorama"></i> Poster</a>
                     <a class="paper-data-item" onclick='copy_bibtext(this)'>&#128278; BibTex</a>
                 </div>
                 <p id="artemis_iclr22_descr" class="paper-small-descr">We take inspiration from image retrieval and cross-modal retrieval to tackle the task of composed image retrieval: we design two complementary modules, each focusing on one modality of the query. The Explicit Matching module assesses how potential targets fit the textual modifier while the Implicit Similarity module compares potential target images to the reference image, assisted by the text. We validate our approach on FashionIQ, Shoes and CIRR.</p>
@@ -380,6 +373,19 @@
 
     </div>
 
+    <!-- TALKS -->
+    <div>
+        <div class="section">
+            <p>Talks</p>
+            <hr>
+        </div>
+    <ul>
+        <li><a href="https://sites.google.com/view/dlbcn2023/program/talks?authuser=0" target="_blank" rel="noopener noreferrer">DLBCN 2023</a>: PoseFix: Correcting 3D Human Poses with Natural Language (<a href="https://www.youtube.com/live/mWY45fPRUK4?feature=shared&t=12420" target="_blank" rel="noopener noreferrer">recording</a>).</li>
+        <li><a href="https://sites.google.com/view/dlbcn2022/program/talks?authuser=0" target="_blank" rel="noopener noreferrer">DLBCN 2022</a>: PoseScript: 3D Human Poses from Natural Language.</li>
+    </ul>
+
+    </div>
+
     <!-- BIOGRAPHY -->
     <div>
         <div class="section">
@@ -387,17 +393,27 @@
             <hr>
         </div>
         <div class="bio">
-            <!-- <div class="bio-item"><div class="bio-date"><span>2023</span></div><div class="bio-info">Attended <a href="https://iplab.dmi.unict.it/icvss2023/Home" target="_blank" rel="noopener noreferrer">ICVSS 2023</a>.</div></div> -->
-            <div class="bio-item"><div class="bio-date"><span>2023</span></div>
-            <div class="bio-item"><div class="bio-date"><i class="fa fa-tag"></i></div><div class="bio-info">Attended <a href="https://iplab.dmi.unict.it/icvss2023/Home" target="_blank" rel="noopener noreferrer">ICVSS 2023</a>.</div></div>
-            <!-- <div class="bio-item"><div class="bio-date"><span>2021</span></div><div class="bio-info">Starting my PhD at <a href="https://www.iri.upc.edu/" target="_blank" rel="noopener noreferrer">IRI-UPC-CSIC</a> in collaboration with <a href="https://europe.naverlabs.com/ target="_blank" rel="noopener noreferrer"">NAVER LABS Europe</a>, supervised by Francesc Moreno-Noguer, Philippe Weinzaepfel and Grégory Rogez.</div></div> -->
-            <div class="bio-item"><div class="bio-date"><span>2021</span></div>
-            <div class="bio-item"><div class="bio-date"><i class="fa fa-tag"></i></div><div class="bio-info">[December] Starting my PhD at <a href="https://www.iri.upc.edu/" target="_blank" rel="noopener noreferrer">IRI-UPC-CSIC</a> in collaboration with <a href="https://europe.naverlabs.com/ target="_blank" rel="noopener noreferrer"">NAVER LABS Europe</a>, supervised by Francesc Moreno-Noguer, Philippe Weinzaepfel and Grégory Rogez.</div></div>
-            <div class="bio-item"><div class="bio-date"><span>2020</span></div></div>
-            <div class="bio-item"><div class="bio-date"><i class="fa fa-tag"></i></div><div class="bio-info">Internship at <a href="https://europe.naverlabs.com/" target="_blank" rel="noopener noreferrer">NAVER LABS Europe</a>, supervised by Diane Larlus and Rafael Sampaio De Rezende.</div></div>
-            <div class="bio-item"><div class="bio-date"><i class="fa fa-tag"></i></div><div class="bio-info">Obtained the <a href="https://www.master-mva.com/" target="_blank" rel="noopener noreferrer">MVA master's degree</a> (ENS Paris-Saclay).</div></div>
-            <div class="bio-item"><div class="bio-date"><i class="fa fa-tag"></i></div><div class="bio-info">Graduated from <a href="https://www.telecom-paris.fr/" target="_blank" rel="noopener noreferrer">Télécom Paris</a>.</div></div>
+            <div class="bio-item"><div class="bio-date">2023</div></div>
+            <ul>
+                <li>&#x2728; Presented at ICCV, DLBCN.</li>
+                <li>Attended <a href="https://iplab.dmi.unict.it/icvss2023/Home" target="_blank" rel="noopener noreferrer">ICVSS</a>.</li>
+            </ul>
+            <div class="bio-item"><div class="bio-date">2022</div></div>
+            <ul>
+                <li>&#x2728; Presented at ICLR, ECCV, DLBCN.</li>
+            </ul>
+            <div class="bio-item"><div class="bio-date">2021</div></div>
+            <ul>
+                <li>[December] Starting my PhD at <a href="https://www.iri.upc.edu/" target="_blank" rel="noopener noreferrer">IRI-UPC-CSIC</a> in collaboration with <a href="https://europe.naverlabs.com/" target="_blank" rel="noopener noreferrer">NAVER LABS Europe</a>, supervised by Francesc Moreno-Noguer, Philippe Weinzaepfel and Grégory Rogez.</li>
+            </ul>
+            <div class="bio-item"><div class="bio-date">2020</div></div>
+            <ul>
+                <li>Internship at <a href="https://europe.naverlabs.com/" target="_blank" rel="noopener noreferrer">NAVER LABS Europe</a>, supervised by Diane Larlus and Rafael Sampaio De Rezende.</li>
+                <li>&#x1F393; Obtained the <a href="https://www.master-mva.com/" target="_blank" rel="noopener noreferrer">MVA master's degree</a> (ENS Paris-Saclay).</li>
+                <li>&#x1F393; Graduated from <a href="https://www.telecom-paris.fr/" target="_blank" rel="noopener noreferrer">Télécom Paris</a>.</li>
+            </ul>
         </div>
+
     </div>
 
 
